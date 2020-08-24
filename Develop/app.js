@@ -9,7 +9,160 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
 
+
+
+const start = async () =>{
+    let choice = await inquirer.prompt({
+        name:"choice",
+        message:"What would you like to do? [ (1) ENTER NEW EMPLOYE ], [ (2) QUIT ]",
+        type: "list",
+        choices: ["ENTER NEW EMPLOYEE", "QUIT", "1", "2"]
+    });
+
+//    if(choice.choice == '1' || choice.choice == 'ENTER NEW EMPLOYEE' ){
+//        switch(choice){
+//            break;
+//            default:
+//                let something = 'pol'
+//        }
+//    }else{
+//        let = 'pol'
+//     //    RTCPeerConnection.end()
+//    }
+
+}
+
+//make a function to  display and return the type of employee list
+const employeeList = () => {
+    let employees = await inquirer.prompt({
+        name:"list",
+        message:"What role employee would you like to add? [ (1) Employee ], [ (2) Engineer ], [ (3) Manager], [ (4) Intern ]",
+        type: "list",
+        choices: ["Employee", "Engineer", "Manager", "Intern",]
+    });
+
+    switch(employees.list){
+        case "Employee":
+            employeeQuestion();
+            break;
+        case "Engineer":
+            engineerQuestion();
+            break;
+        case "Manager":
+            managerQuestion();
+            break;
+        case "Intern":
+            internQuestion();
+            break;
+    }
+}
+
+// make a x4 a function that returns an inquirer question and instantiation for each type of role
+const employeeQuestion = () => {
+    let emp = inquirer.prompt(
+        {
+            name:"name",
+            message: "What is his/her full name?",
+            type: "input"
+        },
+        {
+            name:"email",
+            message:"What is his/her email?",
+            type: "input"
+        },
+        {
+            name:"id",
+            message:"what is his/her id?",
+            type: "input"
+        }
+    );
+
+    let employee = new Employee(emp.name, emp.email, emp.id)
+
+}
+
+const managerQuestion = () => {
+    let man = inquirer.prompt(
+        {
+            name:"name",
+            message: "What is his/her full name?",
+            type: "input"
+        },
+        {
+            name:"email",
+            message:"What is his/her email?",
+            type: "input"
+        },
+        {
+            name:"id",
+            message:"what is his/her id?",
+            type: "input"
+        },
+        {
+            name:"officeNumber",
+            message:"what is his/her officeNumber?",
+            type: "input"
+        }
+    );
+
+    let manager = new Manager(man.name, man.email, man.id, man.officeNumber);
+}
+
+const engineerQuestion = () => {
+    let git = inquirer.prompt(
+        {
+            name:"name",
+            message: "What is his/her full name?",
+            type: "input"
+        },
+        {
+            name:"email",
+            message:"What is his/her email?",
+            type: "input"
+        },
+        {
+            name:"id",
+            message:"what is his/her id?",
+            type: "input"
+        },
+        {
+            name:"gitHub",
+            message:"what is his/her GitHub username?",
+            type: "input"
+        }
+    );
+
+    let github = new Engineer(git.name, git.email, git.id, git.gitHub)
+}
+
+const internQuestion = () => {
+    let int = inquirer.prompt(
+        {
+            name:"name",
+            message: "What is his/her full name?",
+            type: "input"
+        },
+        {
+            name:"email",
+            message:"What is his/her email?",
+            type: "input"
+        },
+        {
+            name:"id",
+            message:"what is his/her id?",
+            type: "input"
+        },
+        {
+            name:"School",
+            message:"what is the name of his/her University / College?",
+            type: "input"
+        }
+    );
+
+    let intern = new Intern(int.name, int.email, int.id, int.school)
+}
 
 
 
