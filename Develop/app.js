@@ -98,27 +98,27 @@ const employeeQuestion = async () => {
 }
 
 const managerQuestion = async () => {
-    let name, email, id, officeNumber;
+    // let name, email, id, officeNumber;
 
-    name = await inquirer.prompt({
+    let name = await inquirer.prompt({
             name:"fullname",
             message: "What is his/her full name?",
             type: "input"
     });
 
-    email = await inquirer.prompt({
+    let email = await inquirer.prompt({
         name:"email",
         message:"What is his/her email?",
         type: "input"
     });
 
-    id = await inquirer.prompt({
+    let id = await inquirer.prompt({
         name:"id",
         message:"what is his/her id?",
         type: "input"
     });
 
-    officeNumber = await inquirer.prompt({
+    let officeNumber = await inquirer.prompt({
             name:"officeNumber",
             message:"what is his/her officeNumber?",
             type: "input"
