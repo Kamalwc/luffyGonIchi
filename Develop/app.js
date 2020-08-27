@@ -11,7 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
-
+let employees = [];
 
 const start = async () =>{
     let choice = await inquirer.prompt({
@@ -62,11 +62,11 @@ const option = async () =>{
     if(choice.choice == "CONTINUE"){
         employeeList();
     }else{
-        let foo = "f00"
+        render(employees);
     }
 }
 
-// make a x4 a function that returns an inquirer question and instantiation for each type of role
+
 const employeeQuestion = async () => {
     let name = await inquirer.prompt(
         {
@@ -122,8 +122,8 @@ const managerQuestion = async () => {
     });
 
     let manager = new Manager(name.fullname, email.email, id.id, officeNumber.officeNumber);
-        // call html renderer function and pass created object 
-
+    
+    employees.push(manager);
     option();
 }
 
@@ -158,9 +158,8 @@ const engineerQuestion = async () => {
     });
 
     let engineer = new Engineer(name.name, email.email, id.id, github.github);
-            // call html renderer function and pass created object 
-
-
+    
+    employees.push(engineer);
     option();
 }
 
@@ -211,15 +210,22 @@ const internQuestion = async () => {
     
 
     let intern = new Intern(name.name, email.email, id.id, school.school);
-            // call html renderer function and pass created object 
-
+            
+    employees.push(intern);
     option();
 }
 
 start();
 
 
+// After you have your html, you're now ready to create an HTML file using the HTML
+// returned from the `render` function. Now write it to a file named `team.html` in the
+// `output` folder. You can use the variable `outputPath` above target this location.
+// Hint: you may need to check if the `output` folder exists and create it if it
+// does not.
 
+//hor to write html files to another html file ( use output path??)
+// how to include hmtl file like html snippet blocks??
 
 
 
@@ -248,11 +254,7 @@ start();
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
 
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
+
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
