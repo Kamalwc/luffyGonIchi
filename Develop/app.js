@@ -33,15 +33,12 @@ const start = async () =>{
 const employeeList = async () => {
     let employees = await inquirer.prompt({
         name:"list",
-        message:"What role employee would you like to add? [ (1) Employee ], [ (2) Engineer ], [ (3) Manager], [ (4) Intern ]",
+        message:"What role employee would you like to add? [ (1) Engineer ], [ (2) Manager], [ (3) Intern ]",
         type: "list",
-        choices: ["Employee", "Engineer", "Manager", "Intern",]
+        choices: ["Engineer", "Manager", "Intern",]
     });
 
     switch(employees.list){
-        case "Employee":
-            employeeQuestion();
-            break;
         case "Engineer":
             engineerQuestion();
             break;
