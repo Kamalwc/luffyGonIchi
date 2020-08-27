@@ -1,4 +1,4 @@
-const Manager = require("./lib/Manager");
+const Manager = require('./lib/Manager');
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
@@ -9,6 +9,239 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
+
+
+
+const start = async () =>{
+    let choice = await inquirer.prompt({
+        name:"choice",
+        message:"What would you like to do? [ ENTER NEW EMPLOYE ], [ QUIT ]",
+        type: "list",
+        choices: ["ENTER NEW EMPLOYEE", "QUIT"]
+    });
+
+   if(choice.choice == 'ENTER NEW EMPLOYEE' ){
+    employeeList();
+   }else{
+       let foo = 'foo';
+   }
+
+}
+
+//make a function to  display and return the type of employee list
+const employeeList = async () => {
+    let employees = await inquirer.prompt({
+        name:"list",
+        message:"What role employee would you like to add? [ (1) Employee ], [ (2) Engineer ], [ (3) Manager], [ (4) Intern ]",
+        type: "list",
+        choices: ["Employee", "Engineer", "Manager", "Intern",]
+    });
+
+    switch(employees.list){
+        case "Employee":
+            employeeQuestion();
+            break;
+        case "Engineer":
+            engineerQuestion();
+            break;
+        case "Manager":
+            managerQuestion();
+            break;
+        case "Intern":
+            internQuestion();
+            break;
+    }
+}
+const option = async () =>{
+
+    let choice = await inquirer.prompt({
+        name:"choice",
+        message:"Add another employee or Quit?",
+        type:"list",
+        choices: ["CONTINUE","QUIT"]
+    });
+
+    if(choice.choice == "CONTINUE"){
+        employeeList();
+    }else{
+        let foo = "f00"
+    }
+}
+
+// make a x4 a function that returns an inquirer question and instantiation for each type of role
+const employeeQuestion = async () => {
+    let name = await inquirer.prompt(
+        {
+            name:"name",
+            message: "What is his/her full name?",
+            type: "input"
+        }
+    );
+
+    let email = await inquirer.prompt({
+        name:"email",
+        message:"What is his/her email?",
+        type: "input"
+    });
+
+    let id = await inquirer.prompt({
+        name:"id",
+        message:"what is his/her id?",
+        type: "input"
+    })
+
+    let employee = new Employee(name.name, email.email, id.id);
+    // call html renderer function and pass created object 
+
+    option();
+}
+
+const managerQuestion = async () => {
+    // let name, email, id, officeNumber;
+
+    let name = await inquirer.prompt({
+            name:"fullname",
+            message: "What is his/her full name?",
+            type: "input"
+    });
+
+    let email = await inquirer.prompt({
+        name:"email",
+        message:"What is his/her email?",
+        type: "input"
+    });
+
+    let id = await inquirer.prompt({
+        name:"id",
+        message:"what is his/her id?",
+        type: "input"
+    });
+
+    let officeNumber = await inquirer.prompt({
+            name:"officeNumber",
+            message:"what is his/her officeNumber?",
+            type: "input"
+    });
+
+    let manager = new Manager(name.fullname, email.email, id.id, officeNumber.officeNumber);
+        // call html renderer function and pass created object 
+
+    option();
+}
+
+const engineerQuestion = async () => {
+
+    let name, email, id, github;
+
+    name = await inquirer.prompt(
+        {
+            name:"name",
+            message: "What is his/her full name?",
+            type: "input"
+        }
+    );
+
+    email = await inquirer.prompt({
+        name:"email",
+        message:"What is his/her email?",
+        type: "input"
+    });
+
+    id = await inquirer.prompt({
+        name:"id",
+        message:"what is his/her id?",
+        type: "input"
+    });
+
+    github = await inquirer.prompt({
+        name:"github",
+        message:"what is his/her GitHub username?",
+        type: "input"
+    });
+
+    let engineer = new Engineer(name.name, email.email, id.id, github.github);
+            // call html renderer function and pass created object 
+
+
+    option();
+}
+
+const internQuestion = async () => {
+
+    let name, email, id, school;
+
+    try
+    {
+        name = await inquirer.prompt({
+            name:"name",
+            message: "What is his/her full name?",
+            type: "input"
+        });
+    } catch (error){
+        console.log(error);
+    }
+
+    try{
+        email = await inquirer.prompt({
+            name:"email",
+            message:"What is his/her email?",
+            type: "input"
+        });
+    } catch (error){
+        console.log(error);
+    }
+    
+
+    try{
+        id = await inquirer.prompt({
+            name:"id",
+            message:"what is his/her id?",
+            type: "input"
+        });
+    } catch (error){
+        console.log(error);
+    }
+   try{
+        school = await inquirer.prompt({
+            name:"school",
+            message:"what is the name of his/her University / College?",
+            type: "input"
+        });
+    } catch (error){
+        console.log(error);
+    }
+    
+
+    let intern = new Intern(name.name, email.email, id.id, school.school);
+            // call html renderer function and pass created object 
+
+    option();
+}
+
+start();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Write code to use inquirer to gather information about the development team members,
