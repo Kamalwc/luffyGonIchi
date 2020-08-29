@@ -24,7 +24,7 @@ const start = async () =>{
    if(choice.choice == 'ENTER NEW EMPLOYEE' ){
     employeeList();
    }else{
-       let foo = 'foo';
+       let end = 'end';
    }
 
 }
@@ -62,36 +62,8 @@ const option = async () =>{
     if(choice.choice == "CONTINUE"){
         employeeList();
     }else{
-        render(employees);
+        fs.writeFileSync(outputPath, render(employees), "utf8");
     }
-}
-
-
-const employeeQuestion = async () => {
-    let name = await inquirer.prompt(
-        {
-            name:"name",
-            message: "What is his/her full name?",
-            type: "input"
-        }
-    );
-
-    let email = await inquirer.prompt({
-        name:"email",
-        message:"What is his/her email?",
-        type: "input"
-    });
-
-    let id = await inquirer.prompt({
-        name:"id",
-        message:"what is his/her id?",
-        type: "input"
-    })
-
-    let employee = new Employee(name.name, email.email, id.id);
-    // call html renderer function and pass created object 
-
-    option();
 }
 
 const managerQuestion = async () => {
@@ -224,8 +196,10 @@ start();
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
 
-//hor to write html files to another html file ( use output path??)
+//how to write html files to another html file ( use output path??)
 // how to include hmtl file like html snippet blocks??
+
+//****  open html page from CLI that fills the templates with JS
 
 
 
