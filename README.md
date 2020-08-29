@@ -1,4 +1,4 @@
-# Node HTML team generator
+# Node HTML Template Engine
 
 ## Decription 
 * This app uses the inquiere package to create a command line tool that asks for team information and generates and html view of the team.
